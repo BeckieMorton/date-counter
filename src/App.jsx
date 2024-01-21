@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+    <div>
+      <h1>Date Counter</h1>
+      <p>
+        <Counter />
       </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  const [steps, setSteps] = useState(0);
+  const [date, setDate] = useState([]);
+
+  const currentDate = new Date().toDateString();
+
+  const addStep = () => {
+    setSteps(steps + 5);
+  };
+
+  const minusStep = () => {
+    setSteps(steps - 5);
+  };
+
+  const addCount = () => {
+    setCount(count + steps);
+  };
+
+  const minusCount = () => {
+    setCount(count - steps);
+  };
+
+  return (
+    <div>
+      <p>
+        <button onClick={minusStep}>-</button>
+        Step: {steps}
+        <button onClick={addStep}>+</button>
+      </p>
+      <p>
+        <button onClick={minusCount}>-</button>
+        Count: {count}
+        <button onClick={addCount}>+</button>
+      </p>
+      <p>
+        {count} from today is {date}
+      </p>
+      <p>Today's date is: {currentDate}</p>
+    </div>
+  );
+};
