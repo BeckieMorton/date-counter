@@ -1,4 +1,6 @@
 import { useState } from "react";
+import React from "react";
+import { ReactDOM } from "react";
 import "./App.css";
 
 export default function App() {
@@ -15,9 +17,11 @@ export default function App() {
 const Counter = () => {
   const [count, setCount] = useState(0);
   const [steps, setSteps] = useState(0);
-  const [date, setDate] = useState([]);
 
-  const currentDate = new Date().toDateString();
+  const date = new Date();
+  date.setDate(date.getDate() + count);
+
+  let todaysDate = new Date();
 
   const addStep = () => {
     setSteps(steps + 5);
@@ -33,6 +37,7 @@ const Counter = () => {
 
   const minusCount = () => {
     setCount(count - steps);
+    //can do <button onClick=((c) => c -1)>-</button>
   };
 
   return (
@@ -48,9 +53,9 @@ const Counter = () => {
         <button onClick={addCount}>+</button>
       </p>
       <p>
-        {count} from today is {date}
+        {count} days from/to today is {date.toDateString()}
       </p>
-      <p>Today's date is: {currentDate}</p>
+      <p>Today's date is: {todaysDate.toLocaleDateString()}</p>
     </div>
   );
 };
