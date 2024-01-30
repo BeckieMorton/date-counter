@@ -53,7 +53,14 @@ const Counter = () => {
         <button onClick={addCount}>+</button>
       </p>
       <p>
-        {count} days from/to today is {date.toDateString()}
+        <span>
+          {count === 0
+            ? "It is today "
+            : count > 0
+            ? `${count} days from today is `
+            : `${Math.abs(count)} days ago was `}
+          {date.toDateString()}
+        </span>
       </p>
       <p>Today's date is: {todaysDate.toLocaleDateString()}</p>
     </div>
