@@ -1,12 +1,11 @@
 import { useState } from "react";
 import React from "react";
-import { ReactDOM } from "react";
 import "./App.css";
 
-export default function App() {
+export default function App2() {
   return (
     <div>
-      <h1>Date Counter - 1st Edition</h1>
+      <h1>Date Counter - 2nd Edition</h1>
       <p>
         <Counter />
       </p>
@@ -40,16 +39,31 @@ const Counter = () => {
     //can do <button onClick=((c) => c -1)>-</button>
   };
 
+  const resetValues = () => {
+    setCount(0);
+    setSteps(0);
+  };
+
   return (
     <div>
       <p>
-        <button onClick={minusStep}>-</button>
+        <input
+          type="range"
+          min="0"
+          max="10"
+          value={steps}
+          onChange={(e) => setSteps(Number(e.target.value))}
+        />
         Step: {steps}
-        <button onClick={addStep}>+</button>
       </p>
       <p>
+        <p>Count</p>
         <button onClick={minusCount}>-</button>
-        Count: {count}
+        <input
+          type="text"
+          value={count}
+          onChange={(e) => setCount(Number(e.target.value))}
+        />
         <button onClick={addCount}>+</button>
       </p>
       <p>
@@ -62,7 +76,11 @@ const Counter = () => {
           {date.toDateString()}
         </span>
       </p>
-      <p>Today's date is: {todaysDate.toLocaleDateString()}</p>
+      {count !== 0 || steps !== 0 ? (
+        <p>
+          <button onClick={resetValues}>Reset</button>
+        </p>
+      ) : null}
     </div>
   );
 };
